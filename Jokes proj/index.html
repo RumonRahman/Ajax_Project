@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="card">
+        <span>🤭What?</span>
+        <p id="joke" class="description"></p>
+        <div class="action">
+            <button class="valid" onclick="getJoke()">Create jock🤭</button>
+        </div>
+    </div>
+
+    <script src="js/axios.min.js"></script>
+
+    <script>
+        function getJoke(){
+            let config={
+                headers:{
+                    'Accept':'application/json'
+                }
+            }
+
+            axios.get("https://icanhazdadjoke.com",config).then((res)=>{
+                console.log(res.data.joke);
+                document.getElementById("joke").innerHTML=res.data.joke
+            }).catch((err)=>{
+                console.error(err)
+                document.getElementById("joke").innerHTML="An error occurred while fetching the joke."
+            })
+        }
+
+        window.onload=getJoke
+    </script>
+     
+</body>
+</html>
