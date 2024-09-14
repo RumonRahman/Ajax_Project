@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card design</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+     
+</head>
+<body>
+    
+    <h1 style="text-align: center;">Card data</h1>
+    <div class="container">
+        <div class="row" id="body">
+             
+        </div>
+    </div>
+
+    <script src="./js/axios.min.js"></script>
+
+    <script>
+        function dataLoaded(){
+            let cardBody= document.querySelector('#body')
+
+            axios.get("https://jsonplaceholder.typicode.com/photos").then((res)=>{
+                console.log(res.data)
+                let posts=res.data
+
+                posts.slice(0,10).map((post)=>{
+                    cardBody.innerHTML=cardBody.innerHTML+ `
+                    <div class="col-4">
+                        <div class="card">
+                            <img class="card-img-top" src=${post.url} alt="Card image cap">
+                        <div              class="card-body">
+                            <h4 class="card-title">Card title</h4>
+                            <p class="card-text">
+                            ${post.title}
+                            </p>
+                            <a href="#!" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                `
+                })
+            })
+        }
+        window.onload=dataLoaded
+    </script>
+</body>
+</html>
